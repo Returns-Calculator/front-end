@@ -5,13 +5,20 @@ import { useAuth0 } from "./auth/react-auth0-spa";
 const NavBar = () => {
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
+  const logoutWithRedirect = () =>
+    logout({
+      returnTo: window.location.origin
+    });
+
   return (
     <div>
       {!isAuthenticated && (
         <button onClick={() => loginWithRedirect({})}>Log in</button>
       )}
 
-      {isAuthenticated && <button onClick={() => logout()}>Log out</button>}
+      {isAuthenticated && (
+        <button onClick={() => logoutWithRedirect()}>Log out</button>
+      )}
 
       {isAuthenticated && (
         <span>
